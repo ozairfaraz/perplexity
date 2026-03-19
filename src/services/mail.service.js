@@ -1,19 +1,5 @@
 import nodemailer from "nodemailer";
 
-// log environment values once to help debug missing credentials
-console.log("mail service env:", {
-  user: process.env.GOOGLE_USER,
-  clientId:
-    process.env.GOOGLE_CLIENT_ID &&
-    process.env.GOOGLE_CLIENT_ID.slice(0, 10) + "…",
-  clientSecret:
-    process.env.GOOGLE_CLIENT_SECRET &&
-    process.env.GOOGLE_CLIENT_SECRET.slice(0, 10) + "…",
-  refreshToken:
-    process.env.GOOGLE_REFRESH_TOKEN &&
-    process.env.GOOGLE_REFRESH_TOKEN.slice(0, 10) + "…",
-});
-
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -22,6 +8,7 @@ const transporter = nodemailer.createTransport({
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
     clientId: process.env.GOOGLE_CLIENT_ID,
+    expires:60*60*1000*24*30, // 30 days
   },
 });
 
