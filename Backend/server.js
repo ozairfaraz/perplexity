@@ -3,14 +3,20 @@
 import "dotenv/config.js";
 import app from "./src/app.js";
 import connectDB from "./src/config/database.js";
+import http from "http";
+import { initSocket } from "./src/sockets/server.socket.js";
 
 const PORT = process.env.BACKEND_PORT || 3000;
+
+const httpServer = http.createServer(app);
+
+initSocket(httpServer);
 
 connectDB().catch((err) => {
   console.error(`Error connecting to the database: ${err}`);
   process.exit(1);
 });
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`Server is running on port ${process.env.BACKEND_PORT}`);
 });
