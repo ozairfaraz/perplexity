@@ -4,7 +4,7 @@ import {
   verifyEmail,
   login,
   getMe,
-} from "../controller/auth.conteoller.js";
+} from "../controller/auth.controller.js";
 import {
   registerValidator,
   loginValidator,
